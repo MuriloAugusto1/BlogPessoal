@@ -2,7 +2,7 @@ package org.generation.blogpessoal.controller;
 
 import java.util.List;
 
-import org.generation.blogpessoal.model.Postagem;
+import org.generation.blogpessoal.model.PostagemModel;
 import org.generation.blogpessoal.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +20,17 @@ public class PostagemController {
 	private PostagemRepository repository;
 
 	@GetMapping("/all")
-	public ResponseEntity<List<Postagem>> GetAll() {
+	public ResponseEntity<List<PostagemModel>> GetAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
 	@GetMapping("/id1")
-	public ResponseEntity<List<Postagem>> findById() {
+	public ResponseEntity<List<PostagemModel>> findById() {
 		return ResponseEntity.ok(repository.findById(1l));
 	}
 
 	@GetMapping("/titulo")
-	public ResponseEntity<List<Postagem>> GetByTitulo() {
+	public ResponseEntity<List<PostagemModel>> GetByTitulo() {
 		return ResponseEntity.ok(repository.findByTituloContainingIgnoreCase("bla"));
 	}
 
