@@ -2,6 +2,8 @@ package org.generation.blogpessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.generation.blogpessoal.model.PostagemModel;
 import org.generation.blogpessoal.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class PostagemController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<PostagemModel> findById(@PathVariable(value = "id") long id){
+	public ResponseEntity<PostagemModel> findById(@PathVariable(value = "id") Long id){
 		return repository.findById(id).map(resp -> ResponseEntity.status(200).body(resp))
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id não existe"));
 	}
@@ -43,18 +45,17 @@ public class PostagemController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<PostagemModel> post (@RequestBody PostagemModel postagem){
+	public ResponseEntity<PostagemModel> post (@Valid @RequestBody PostagemModel postagem){
 		return ResponseEntity.status(201).body(repository.save(postagem));
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<PostagemModel> put (@RequestBody PostagemModel postagem){
+	public ResponseEntity<PostagemModel> put (@Valid @RequestBody PostagemModel postagem){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(postagem));
 	}
 	
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable(value = "id") long id) {
+	@DeleteMapping("/remove/{id}")
+	public void delete(@PathVariable(value = "id") Long id) {
 		repository.deleteById(id);
-
 	}
 }

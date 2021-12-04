@@ -18,18 +18,13 @@ public class PostagemModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
-	@NotNull
-	@Size(min = 5, max = 100)
-	private String titulo;
+	private @NotNull @Size(min = 5, max = 100) String titulo;
 
-	@NotNull
-	@Size(min = 10, max = 500)
-	private String texto;
+	private @NotNull @Size(min = 10, max = 500) String texto;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date date = new java.sql.Date(System.currentTimeMillis());
+	private @Temporal(TemporalType.TIMESTAMP) Date date = new java.sql.Date(System.currentTimeMillis());
 
 	public long getId() {
 		return id;
