@@ -8,8 +8,10 @@ import org.generation.blogpessoal.model.UserLogin;
 import org.generation.blogpessoal.model.UsuarioModel;
 import org.generation.blogpessoal.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 
 
@@ -20,12 +22,18 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 	
 	public UsuarioModel CadastrarUsuario(UsuarioModel usuario) {
+		Optional<UsuarioModel> optional = repository.findByUsuario(usuario.getUsuario());
+		
+		if (optional.isEmpty()) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		String senhaEncoder = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaEncoder);
 		
 		return repository.save(usuario);
+		} else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuário já existente");
+		}
 	}
 	
 	public Optional<UserLogin> Logar(Optional<UserLogin> user) {
@@ -40,12 +48,15 @@ public class UsuarioService {
 				String authHeader = "Basic " + new String(encodedAuth);
 				
 				user.get().setToken(authHeader);
-				user.get().setToken(authHeader);
 				user.get().setNome(usuario.get().getNome());
+				user.get().setSenha(usuario.get().getSenha());
 				
 				return user;
+			} else {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreta!");
 			}
+		} else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário incorreto!");
 		}
-		return null;
 	}
 }
