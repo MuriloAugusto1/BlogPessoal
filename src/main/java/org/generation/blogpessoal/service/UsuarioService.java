@@ -36,22 +36,22 @@ public class UsuarioService {
 		}
 	}
 	
-	public Optional<UserLogin> Logar(Optional<UserLogin> user) {
+	public Optional<UserLogin> Logar(Optional<UserLogin> usuariologar) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<UsuarioModel> usuario = repository.findByUsuario(user.get().getUsuario());
+		Optional<UsuarioModel> usuario = repository.findByUsuario(usuariologar.get().getUsuario());
 		
 		if(usuario.isPresent()) {
-			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
+			if(encoder.matches(usuariologar.get().getSenha(), usuario.get().getSenha())) {
 				
-				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
+				String auth = usuariologar.get().getUsuario() + ":" + usuariologar.get().getSenha();
 				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 				String authHeader = "Basic " + new String(encodedAuth);
 				
-				user.get().setToken(authHeader);
-				user.get().setNome(usuario.get().getNome());
-				user.get().setSenha(usuario.get().getSenha());
+				usuariologar.get().setToken(authHeader);
+				usuariologar.get().setNome(usuario.get().getNome());
+				usuariologar.get().setSenha(usuario.get().getSenha());
 				
-				return user;
+				return usuariologar;
 			} else {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreta!");
 			}

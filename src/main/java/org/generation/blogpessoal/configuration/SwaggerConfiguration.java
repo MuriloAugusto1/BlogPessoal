@@ -44,11 +44,11 @@ public class SwaggerConfiguration {
 			openApi.getPaths().values().forEach(pathItem -> pathItem.readOperations().forEach(operation -> {
 				ApiResponses api = operation.getResponses();
 				
-				api.addApiResponse("200", createApiResponse("Sucess!"));
-				api.addApiResponse("201", createApiResponse("Created!"));
-				api.addApiResponse("400", createApiResponse("Request error!"));
-				api.addApiResponse("401", createApiResponse("Not authorized!"));
-				api.addApiResponse("500", createApiResponse("Internal server Error!"));
+				api.addApiResponse("200", createApiResponse("Sucesso!"));
+				api.addApiResponse("201", createApiResponse("Criado!"));
+				api.addApiResponse("400", createApiResponse("Erro de requisição!"));
+				api.addApiResponse("401", createApiResponse("Não autorizado!"));
+				api.addApiResponse("500", createApiResponse("Erro interno do servidor!"));
 			}));
 		};
 	}

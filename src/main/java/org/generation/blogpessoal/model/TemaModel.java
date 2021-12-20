@@ -1,5 +1,6 @@
 package org.generation.blogpessoal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,13 +18,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tema")
 public class TemaModel {
 
-	private @NotNull @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
 	private @NotNull String descricao;
 
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("tema")
-	private List<PostagemModel> postagem;
+	private List<PostagemModel> postagem = new ArrayList<>();
 
 	public Long getId() {
 		return id;
