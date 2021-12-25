@@ -2,6 +2,8 @@ package org.generation.blogpessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.generation.blogpessoal.model.TemaModel;
 import org.generation.blogpessoal.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/tema")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
 	
 	@Autowired
@@ -41,12 +43,12 @@ public class TemaController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<TemaModel> post (@RequestBody TemaModel tema) {
+	public ResponseEntity<TemaModel> post (@Valid @RequestBody TemaModel tema) {
 		return ResponseEntity.status(201).body(repository.save(tema));
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<TemaModel> put (@RequestBody TemaModel tema) {
+	public ResponseEntity<TemaModel> put (@Valid @RequestBody TemaModel tema) {
 		return ResponseEntity.ok(repository.save(tema));
 	}
 	

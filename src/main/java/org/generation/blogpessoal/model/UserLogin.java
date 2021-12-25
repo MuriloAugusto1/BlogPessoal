@@ -6,6 +6,8 @@ public class UserLogin {
 
 	private String usuario;
 
+	private String foto;
+
 	private String senha;
 
 	private String token;
@@ -24,6 +26,14 @@ public class UserLogin {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public String getSenha() {
