@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.generation.blogpessoal.model.UserLogin;
 import org.generation.blogpessoal.model.UsuarioModel;
+import org.generation.blogpessoal.model.dto.UserLoginDTO;
 import org.generation.blogpessoal.repository.UsuarioRepository;
 import org.generation.blogpessoal.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +62,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/logar")
-	public ResponseEntity<UserLogin> authentication (@Valid @RequestBody Optional<UserLogin> usuariologar) {
+	public ResponseEntity<UserLoginDTO> authentication (@Valid @RequestBody Optional<UserLoginDTO> usuariologar) {
 		return usuarioService.Logar(usuariologar).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}

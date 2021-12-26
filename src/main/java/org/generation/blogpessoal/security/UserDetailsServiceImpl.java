@@ -15,13 +15,16 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UsuarioRepository userRepository;
+	private UsuarioRepository repository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<UsuarioModel> user = userRepository.findByUsuario(username);
-		user.orElseThrow(() -> new UsernameNotFoundException(username + " not found."));
+		Optional<UsuarioModel> user = repository.findByUsuario(username);
 
-		return user.map(UserDetailsImpl::new).get();
+		if (user.isPresent()) {
+			return new UserDetailsImpl(user.get());
+		} else {
+			throw new UsernameNotFoundException("Usuario não existe");
+		}
 	}
 }
