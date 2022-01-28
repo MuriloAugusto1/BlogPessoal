@@ -1,6 +1,7 @@
 package org.generation.blogpessoal.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +20,8 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("murilo").password(passwordEncoder().encode("murilo")).authorities("ROLE_ADMIN");
+		auth.inMemoryAuthentication().withUser("murilo").password(passwordEncoder().encode("murilo"))
+				.authorities("ROLE_ADMIN");
 		auth.userDetailsService(userDetailsService);
 	}
 
@@ -30,8 +32,9 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/usuarios/logar").permitAll().antMatchers("/usuarios/cadastrar")
-				.permitAll().anyRequest().authenticated().and().httpBasic().and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().and().csrf().disable();
+		http.authorizeRequests().antMatchers("/**").permitAll().antMatchers("/usuarios/logar").permitAll()
+				.antMatchers("/usuarios/cadastrar").permitAll().anyRequest().authenticated().and().httpBasic().and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().and().csrf()
+				.disable();
 	}
 }

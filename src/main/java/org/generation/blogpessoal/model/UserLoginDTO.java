@@ -1,6 +1,8 @@
-package org.generation.blogpessoal.model.dto;
+package org.generation.blogpessoal.model;
 
 public class UserLoginDTO {
+	
+	private Long id;
 
 	private String nome;
 
@@ -11,6 +13,16 @@ public class UserLoginDTO {
 	private String senha;
 
 	private String token;
+	
+	private String tipo;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -50,6 +62,14 @@ public class UserLoginDTO {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

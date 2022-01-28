@@ -52,7 +52,7 @@ public class TemaController {
 		return ResponseEntity.ok(repository.save(tema));
 	}
 	
-	@DeleteMapping("/remove/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}

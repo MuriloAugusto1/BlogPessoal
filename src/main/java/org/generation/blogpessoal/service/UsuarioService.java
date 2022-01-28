@@ -4,8 +4,8 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
+import org.generation.blogpessoal.model.UserLoginDTO;
 import org.generation.blogpessoal.model.UsuarioModel;
-import org.generation.blogpessoal.model.dto.UserLoginDTO;
 import org.generation.blogpessoal.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +48,8 @@ public class UsuarioService {
 				String authHeader = "Basic " + new String(encodedAuth);
 				
 				usuariologar.get().setNome(usuario.get().getNome());
+				usuariologar.get().setId(usuario.get().getId());
+				usuariologar.get().setTipo(usuario.get().getTipo());
 				usuariologar.get().setFoto(usuario.get().getFoto());
 				usuariologar.get().setSenha(usuario.get().getSenha());
 				usuariologar.get().setToken(authHeader);
